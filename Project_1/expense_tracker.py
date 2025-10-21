@@ -4,7 +4,6 @@ import csv
 expenses = []
 
 def create_monthly_budget():
-    print("#" * 70)
     return float(input("Enter the monthly Budget for the month: "))
 
 def calculate_monthly_expenses():
@@ -18,17 +17,17 @@ def calculate_monthly_expenses():
         calculated_budget += float(row["Amount"])
     
     if calculated_budget > monthly_budget:
-        print(f"Over budget by ₹{calculated_budget - monthly_budget:.2f}")
+        print("^" * 70)
+        print(f"[INFO] Over budget by ₹{calculated_budget - monthly_budget:.2f}")
     else:
-        print(f"You have ₹{monthly_budget - calculated_budget:.2f} left in your budget.")
-    print("#" * 70)
+        print("!" * 70)
+        print(f"[INFO] You have ₹{monthly_budget - calculated_budget:.2f} left in your budget.")
     
 def load_expenses_from_file():
     filename = "expenses_saved.csv"
     global expenses
 
     if not os.path.isfile(filename):
-        print("No expenses recorded yet, file not created")
         return expenses
     
     with open(filename, mode="r", newline="", encoding="utf-8") as file:
@@ -84,9 +83,10 @@ def display_the_expenses():
         print("\nNo expense  found.")
         return
     
-    print("\n\t All Recorded Expenses:")
-    print("-" * 70)
-    print(f"{'Date':<12} {'Category':<15} {'Amount':<10} {'Description'}")
+    print("#" * 70)
+    print(f"{'All Recorded Expenses':>45}")
+    print("#" * 70)
+    print(f"{'Date':<12} | {'Category':<15} | {'Amount':<10} | {'Description'}")
     print("-" * 70)
 
     missing_records = []
@@ -95,25 +95,26 @@ def display_the_expenses():
         if missing_fields:
             missing_records.append(row)
         else:
-            print(f"{row['Date']:<12} {row['Category']:<15} {row['Amount']:<10} {row['Description']}")
+            print(f"{row['Date']:<12} | {row['Category']:<15} | {row['Amount']:<10} | {row['Description']}")
     
     if missing_records:
-        print("\n\tMissing Records:")
         print("*" * 70)
-        print(f"{'Date':<12} {'Category':<15} {'Amount':<10} {'Description'}")
+        print(f"{'Missing Records':>45}")
         print("*" * 70)
+        print(f"{'Date':<12} | {'Category':<15} | {'Amount':<10} | {'Description'}")
+        print("-" * 70)
         for items in missing_records:
-            print(f"{items['Date']:<12} {items['Category']:<15} {items['Amount']:<10} {items['Description']}")
+            print(f"{items['Date']:<12} | {items['Category']:<15} | {items['Amount']:<10} | {items['Description']}")
 
-    print("-" * 70)
-    print(f"Total no. of records: {len(expenses)}")
-    print(f"Records with missing fields: {len(missing_records)}")
+    print("#" * 70)
+    print(f"[INFO] Total no. of records: {len(expenses)}")
+    print(f"[INFO] Records with missing fields: {len(missing_records)}")
 
 def user_menu():
     while True:
-        print("\n"+"="*70)
-        print("Personal Expense Tracker")
-        print("="*70)
+        print("\n"+"+"*70)
+        print(f"{'Personal Expense Tracker':>45}")
+        print("+"*70)
         print("1. Add New Expenses")
         print("2. View All Expenses")
         print("3. Track montly budget")
