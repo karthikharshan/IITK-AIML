@@ -39,6 +39,7 @@ def load_expenses_from_file():
 def enter_expenses_details():
     #Get the details of the user
     global expenses
+    print("=" * 70)
     date = input("Enter the date of expense (YYYY-MM-DD): ").strip()
     category = input("Enter the category (e.g, Food, Travel, Health, etc): ").strip()
     while True:
